@@ -492,6 +492,7 @@
             
             // Player
             var px = player.x - game.camera.x;
+            var py = player.y;
             var legOffset = player.onGround && Math.abs(player.vx) > 0.5 ? Math.sin(Date.now() / 60) * 4 : 0;
             
             ctx.fillStyle = '#0000CD';
