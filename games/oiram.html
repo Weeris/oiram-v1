@@ -145,6 +145,7 @@
             <h1>🍄 Oiram-V1 🍄</h1>
             <p id="overlayMessage">A simple platformer game</p>
             <button id="startBtn">START GAME</button>
+            <button id="soundBtn" onclick="toggleSound()" style="margin-top: 10px; padding: 10px 25px; font-size: 14px; background: linear-gradient(180deg, #5c94fc 0%, #0044aa 100%);">🔊 Sound ON</button>
             <div class="controls">
                 <h3>Controls</h3>
                 <p><span class="key">←</span> <span class="key">→</span> Move Left/Right</p>
@@ -450,6 +451,7 @@
                 player.onGround = false;
                 player.coyoteTime = 0;
                 player.jumpBuffer = 0;
+                playSound('jump');
             }
             
             // Gravity
@@ -532,7 +534,9 @@
                         enemy.alive = false;
                         player.vy = -8;
                         game.score += 100;
+                        playSound('stomp');
                     } else {
+                        playSound('die');
                         playerDeath();
                     }
                 }
@@ -550,6 +554,7 @@
                 if (rectCollision(player, coin)) {
                     coin.collected = true;
                     game.score += coin.type === 'block' ? 100 : 10;
+                    playSound(coin.type === 'block' ? 'brick' : 'coin');
                 }
             });
         }
@@ -824,6 +829,121 @@
         }
 
         // ========================================
+        // SOUND SYSTEM (Web Audio API)
+        // ========================================
+        
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let soundEnabled = true;
+        
+        // Sound synthesizer
+        function playSound(type) {
+            if (!soundEnabled || !audioContext) return;
+            
+            // Resume audio context if suspended (browser policy)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            const now = audioContext.currentTime;
+            
+            switch(type) {
+                case 'jump':
+                    // Rising jump sound (400Hz -> 800Hz)
+                    oscillator.type = 'square';
+                    oscillator.frequency.setValueAtTime(400, now);
+                    oscillator.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+                    gainNode.gain.setValueAtTime(0.1, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.1);
+                    break;
+                    
+                case 'coin':
+                    // High coin sound (900Hz -> 1200Hz two notes)
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(900, now);
+                    oscillator.frequency.setValueAtTime(1200, now + 0.08);
+                    gainNode.gain.setValueAtTime(0.15, now);
+                    gainNode.gain.setValueAtTime(0.15, now + 0.08);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.2);
+                    break;
+                    
+                case 'stomp':
+                    // Low thump sound for stomping enemy
+                    oscillator.type = 'triangle';
+                    oscillator.frequency.setValueAtTime(200, now);
+                    oscillator.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+                    gainNode.gain.setValueAtTime(0.2, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.1);
+                    break;
+                    
+                case 'die':
+                    // Descending death sound
+                    oscillator.type = 'sawtooth';
+                    oscillator.frequency.setValueAtTime(300, now);
+                    oscillator.frequency.exponentialRampToValueAtTime(50, now + 0.5);
+                    gainNode.gain.setValueAtTime(0.15, now);
+                    gainNode.gain.linearRampToValueAtTime(0, now + 0.5);
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.5);
+                    break;
+                    
+                case 'win':
+                    // Victory fanfare (arpeggio)
+                    const notes = [523, 659, 784, 1047]; // C5, E5, G5, C6
+                    notes.forEach((freq, i) => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        
+                        osc.type = 'square';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.15);
+                        gain.gain.setValueAtTime(0.1, now + i * 0.15);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.15 + 0.12);
+                        
+                        osc.start(now + i * 0.15);
+                        osc.stop(now + i * 0.15 + 0.12);
+                    });
+                    break;
+                    
+                case 'brick':
+                    // Brick bump sound
+                    oscillator.type = 'square';
+                    oscillator.frequency.setValueAtTime(200, now);
+                    oscillator.frequency.setValueAtTime(150, now + 0.05);
+                    gainNode.gain.setValueAtTime(0.1, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.1);
+                    break;
+            }
+        }
+        
+        // Toggle sound on/off
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundBtn');
+            if (btn) {
+                btn.textContent = soundEnabled ? '🔊 Sound ON' : '🔇 Sound OFF';
+                btn.style.background = soundEnabled 
+                    ? 'linear-gradient(180deg, #5c94fc 0%, #0044aa 100%)'
+                    : 'linear-gradient(180deg, #666 0%, #333 100%)';
+            }
+            return soundEnabled;
+        }
+
+        // ========================================
         // UTILITY
         // ========================================
         
@@ -840,6 +960,7 @@
         }
 
         function showWinScreen() {
+            playSound('win');
             const overlay = document.getElementById('overlay');
             overlay.classList.remove('hidden');
             overlay.innerHTML = `
