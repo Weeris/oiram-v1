@@ -72,7 +72,9 @@
     </div>
     <script>
         const CONFIG = { GRAVITY: 0.6, FRICTION: 0.85, PLAYER_SPEED: 5, JUMP_FORCE: -14, GROUND_Y: 400 };
-        const game = { canvas: null, ctx: null, running: false, score: 0, highScore: parseInt(localStorage.getItem('oiram_highscore')) || 0, lives: 3, keys: {}, camera: { x: 0 }, worldWidth: 3000, isMobile: false, canvasScale: 1, newHighScore: false };
+        let highScore = 0;
+        try { highScore = parseInt(localStorage.getItem('oiram_highscore')) || 0; } catch(e) {}
+        const game = { canvas: null, ctx: null, running: false, score: 0, highScore: highScore, lives: 3, keys: {}, camera: { x: 0 }, worldWidth: 3000, isMobile: false, canvasScale: 1, newHighScore: false };
         const player = { x: 100, y: 300, width: 32, height: 40, vx: 0, vy: 0, onGround: false, facing: 1, invincible: false, invincibleTimer: 0, coyoteTime: 0, jumpBuffer: 0 };
         const platforms = [
             { x: 0, y: 400, width: 3000, height: 80, type: 'ground' },
