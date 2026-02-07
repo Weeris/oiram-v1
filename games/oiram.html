@@ -8,29 +8,30 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         body { background: #1a1a2e; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; overflow: hidden; user-select: none; }
         #gameContainer { position: relative; background: #5c94fc; border: 4px solid #1e3a5f; border-radius: 8px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); overflow: hidden; }
-        #gameCanvas { display: block; background: linear-gradient(180deg, #5c94fc 0%, #87ceeb 50%, #98d4ee 100%); }
-        #ui { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; font-size: 14px; color: white; text-shadow: 2px 2px 0 #000; pointer-events: none; font-weight: bold; z-index: 10; }
-        #overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 100; }
+        #gameCanvas { display: block; background: linear-gradient(180deg, #5c94fc 0%, #87ceeb 60%, #90EE90 100%); }
+        #ui { position: absolute; top: 8px; left: 10px; right: 10px; display: flex; justify-content: space-between; font-size: 16px; color: white; text-shadow: 2px 2px 0 #000; pointer-events: none; font-weight: bold; z-index: 10; }
+        #overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.75); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 100; }
         #overlay.hidden { display: none; }
-        #overlay h1 { font-size: 32px; margin-bottom: 15px; text-shadow: 3px 3px 0 #e3001b; text-align: center; }
-        #overlay p { font-size: 16px; margin-bottom: 20px; color: #ccc; text-align: center; }
-        #overlay button { padding: 15px 40px; font-size: 18px; font-weight: bold; color: white; background: linear-gradient(180deg, #4CAF50 0%, #388E3C 100%); border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 0 #2E7D32; margin: 5px; }
-        #overlay button:active { transform: translateY(2px); box-shadow: 0 2px 0 #2E7D32; }
+        #overlay h1 { font-size: 36px; margin-bottom: 15px; text-shadow: 3px 3px 0 #e3001b; }
+        #overlay p { font-size: 18px; margin-bottom: 25px; color: #ffcc00; }
+        #overlay button { padding: 15px 50px; font-size: 20px; font-weight: bold; color: white; background: linear-gradient(180deg, #e3001b 0%, #b30000 100%); border: 3px solid #fff; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 0 #800000; }
+        #overlay button:active { transform: translateY(2px); box-shadow: 0 2px 0 #800000; }
         #touchControls { display: none; position: absolute; bottom: 20px; left: 20px; z-index: 20; }
         #touchControls.active { display: flex; flex-direction: column; align-items: flex-start; }
-        .touch-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); border: 3px solid rgba(255, 255, 255, 0.5); color: white; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.1s ease; margin: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-        .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.5); transform: scale(0.95); box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .touch-btn { width: 65px; height: 65px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); border: 4px solid rgba(255, 255, 255, 0.6); color: white; font-size: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.1s ease; margin: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.4); font-weight: bold; }
+        .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.6); transform: scale(0.92); }
         .touch-row { display: flex; flex-direction: column; align-items: flex-start; }
         .touch-dpad { display: flex; gap: 8px; }
-        .touch-action { display: flex; gap: 8px; margin-bottom: 5px; }
-        #pauseBtn { width: 45px; height: 45px; font-size: 16px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.4); display: none; z-index: 25; border-radius: 50%; }
+        .touch-action { display: flex; gap: 8px; margin-bottom: 8px; }
+        #pauseBtn { width: 50px; height: 50px; font-size: 18px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.5); display: none; z-index: 25; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); }
         @media (max-width: 768px) {
-            #gameContainer { width: 100% !important; height: auto !important; border-radius: 0; border-left: none; border-right: none; }
+            #gameContainer { width: 100% !important; height: auto !important; border-radius: 0; border: none; }
             #gameCanvas { width: 100% !important; height: auto !important; }
-            #overlay h1 { font-size: 28px; }
-            #overlay button { padding: 12px 30px; font-size: 16px; }
+            #overlay h1 { font-size: 32px; }
+            #overlay button { padding: 12px 40px; font-size: 18px; }
             #touchControls { display: flex; }
-            #ui { font-size: 12px; }
+            #ui { font-size: 14px; padding: 5px 10px; }
+            .touch-btn { width: 60px; height: 60px; font-size: 22px; }
         }
     </style>
 </head>
@@ -38,15 +39,17 @@
     <div id="gameContainer">
         <canvas id="gameCanvas" width="800" height="480"></canvas>
         <div id="ui">
-            <div id="score">SCORE: 0</div>
-            <div id="highScore">BEST: 0</div>
-            <div id="lives">LIVES: 3</div>
+            <div>SCORE: <span id="score">0</span></div>
+            <div>WORLD <span style="color:#ffcc00">1-1</span></div>
+            <div>COINS: <span id="coins">0</span></div>
+            <div style="color: #ffcc00">★ <span id="highScore">0</span></div>
+            <div>LIVES: <span id="lives">3</span></div>
         </div>
-        <button id="pauseBtn">PAUSE</button>
+        <button id="pauseBtn">⏸</button>
         <div id="touchControls">
             <div class="touch-row">
                 <div class="touch-action">
-                    <button class="touch-btn" id="btnJump">●</button>
+                    <button class="touch-btn" id="btnJump">A</button>
                 </div>
                 <div class="touch-dpad">
                     <button class="touch-btn" id="btnLeft">◀</button>
@@ -55,81 +58,100 @@
             </div>
         </div>
         <div id="overlay">
-            <h1>Oiram-V1</h1>
-            <p>Tap START to play!</p>
-            <button id="startBtn">START GAME</button>
+            <h1 style="font-size: 48px; margin-bottom: 20px;">🍄 OIRAM 🍄</h1>
+            <p style="font-size: 20px; margin-bottom: 30px;">Collect coins & reach the flag!</p>
+            <button id="startBtn">START</button>
         </div>
     </div>
     <script>
         // Config
-        const CONFIG = { GRAVITY: 0.6, FRICTION: 0.85, PLAYER_SPEED: 5, JUMP_FORCE: -14, GROUND_Y: 400 };
+        const CONFIG = { GRAVITY: 0.6, FRICTION: 0.88, PLAYER_SPEED: 4.5, JUMP_FORCE: -13, GROUND_Y: 400 };
         
         // High Score
         let highScore = 0;
         try { highScore = parseInt(localStorage.getItem('oiram_highscore')) || 0; } catch(e) {}
+        let coinCount = 0;
         
         // Game State
-        const game = { canvas: null, ctx: null, running: false, score: 0, highScore: highScore, lives: 3, keys: {}, camera: { x: 0 }, worldWidth: 3000, isMobile: false, canvasScale: 1 };
+        const game = { canvas: null, ctx: null, running: false, score: 0, highScore: highScore, lives: 3, keys: {}, camera: { x: 0 }, worldWidth: 3200, isMobile: false, canvasScale: 1, coins: 0, time: 300 };
         
         // Player
-        const player = { x: 100, y: 300, width: 32, height: 40, vx: 0, vy: 0, onGround: false, facing: 1 };
+        const player = { x: 100, y: 300, width: 28, height: 32, vx: 0, vy: 0, onGround: false, facing: 1, frame: 0, frameTimer: 0, small: true };
         
         // Platforms
         const platforms = [
-            { x: 0, y: 400, width: 3000, height: 80, type: 'ground' },
-            { x: 300, y: 320, width: 120, height: 24, type: 'brick' },
-            { x: 500, y: 280, width: 80, height: 24, type: 'brick' },
-            { x: 650, y: 240, width: 120, height: 24, type: 'brick' },
-            { x: 850, y: 300, width: 100, height: 24, type: 'brick' },
-            { x: 1050, y: 260, width: 80, height: 24, type: 'brick' },
-            { x: 1200, y: 220, width: 100, height: 24, type: 'brick' },
-            { x: 1400, y: 300, width: 120, height: 24, type: 'brick' },
-            { x: 1600, y: 250, width: 80, height: 24, type: 'brick' },
-            { x: 1800, y: 200, width: 100, height: 24, type: 'brick' },
-            { x: 2000, y: 280, width: 80, height: 24, type: 'brick' },
-            { x: 2200, y: 320, width: 100, height: 24, type: 'brick' },
-            { x: 1100, y: 336, width: 60, height: 64, type: 'pipe' },
-            { x: 2600, y: 360, width: 60, height: 40, type: 'brick' },
-            { x: 2680, y: 320, width: 60, height: 80, type: 'brick' },
+            { x: 0, y: 400, width: 3200, height: 80, type: 'ground' },
+            { x: 250, y: 320, width: 80, height: 24, type: 'brick' },
+            { x: 400, y: 280, width: 100, height: 24, type: 'brick' },
+            { x: 550, y: 240, width: 80, height: 24, type: 'question', content: 'coin' },
+            { x: 700, y: 300, width: 120, height: 24, type: 'brick' },
+            { x: 900, y: 260, width: 80, height: 24, type: 'brick' },
+            { x: 1050, y: 220, width: 100, height: 24, type: 'question', content: 'coin' },
+            { x: 1250, y: 300, width: 80, height: 24, type: 'brick' },
+            { x: 1400, y: 340, width: 60, height: 60, type: 'pipe' },
+            { x: 1550, y: 280, width: 80, height: 24, type: 'brick' },
+            { x: 1700, y: 240, width: 100, height: 24, type: 'question', content: 'coin' },
+            { x: 1900, y: 200, width: 80, height: 24, type: 'brick' },
+            { x: 2100, y: 280, width: 120, height: 24, type: 'brick' },
+            { x: 2300, y: 320, width: 80, height: 24, type: 'brick' },
+            { x: 2500, y: 360, width: 60, height: 40, type: 'brick' },
+            { x: 2650, y: 300, width: 60, height: 100, type: 'brick' },
+            { x: 2800, y: 240, width: 60, height: 160, type: 'brick' },
         ];
         
         // Enemies
         const enemies = [
-            { x: 350, y: 368, width: 32, height: 32, vx: -1, alive: true },
-            { x: 600, y: 368, width: 32, height: 32, vx: -1.5, alive: true },
-            { x: 900, y: 368, width: 32, height: 32, vx: -1, alive: true },
-            { x: 1150, y: 368, width: 32, height: 32, vx: -2, alive: true },
-            { x: 1500, y: 368, width: 32, height: 32, vx: -1.5, alive: true },
-            { x: 1850, y: 368, width: 32, height: 32, vx: -1, alive: true },
-            { x: 2100, y: 368, width: 32, height: 32, vx: -2, alive: true },
-            { x: 2400, y: 368, width: 32, height: 32, vx: -1, alive: true },
+            { x: 380, y: 368, width: 28, height: 28, vx: -1.2, alive: true, type: 'goomba' },
+            { x: 650, y: 368, width: 28, height: 28, vx: -1.5, alive: true, type: 'goomba' },
+            { x: 980, y: 368, width: 28, height: 28, vx: -1, alive: true, type: 'goomba' },
+            { x: 1200, y: 368, width: 28, height: 28, vx: -2, alive: true, type: 'goomba' },
+            { x: 1480, y: 368, width: 28, height: 28, vx: -1.3, alive: true, type: 'goomba' },
+            { x: 1750, y: 368, width: 28, height: 28, vx: -1.5, alive: true, type: 'goomba' },
+            { x: 2050, y: 368, width: 28, height: 28, vx: -1, alive: true, type: 'goomba' },
+            { x: 2350, y: 368, width: 28, height: 28, vx: -1.8, alive: true, type: 'goomba' },
         ];
         
         // Coins
         const coins = [
-            { x: 200, y: 360, width: 20, height: 24, collected: false },
-            { x: 400, y: 280, width: 20, height: 24, collected: false },
-            { x: 520, y: 240, width: 20, height: 24, collected: false },
-            { x: 700, y: 200, width: 20, height: 24, collected: false },
-            { x: 900, y: 260, width: 20, height: 24, collected: false },
-            { x: 1080, y: 220, width: 20, height: 24, collected: false },
-            { x: 1220, y: 180, width: 20, height: 24, collected: false },
-            { x: 1430, y: 260, width: 20, height: 24, collected: false },
-            { x: 1620, y: 210, width: 20, height: 24, collected: false },
-            { x: 1820, y: 160, width: 20, height: 24, collected: false },
-            { x: 2030, y: 240, width: 20, height: 24, collected: false },
-            { x: 2230, y: 280, width: 20, height: 24, collected: false },
+            { x: 280, y: 280, collected: false },
+            { x: 320, y: 280, collected: false },
+            { x: 430, y: 240, collected: false },
+            { x: 470, y: 240, collected: false },
+            { x: 580, y: 200, collected: false },
+            { x: 730, y: 260, collected: false },
+            { x: 770, y: 260, collected: false },
+            { x: 930, y: 220, collected: false },
+            { x: 970, y: 220, collected: false },
+            { x: 1080, y: 180, collected: false },
+            { x: 1280, y: 260, collected: false },
+            { x: 1320, y: 260, collected: false },
+            { x: 1580, y: 240, collected: false },
+            { x: 1730, y: 200, collected: false },
+            { x: 1770, y: 200, collected: false },
+            { x: 1930, y: 160, collected: false },
+            { x: 2130, y: 240, collected: false },
+            { x: 2170, y: 240, collected: false },
+            { x: 2330, y: 280, collected: false },
+            { x: 2530, y: 320, collected: false },
         ];
         
-        // Flagpole
-        const flagpole = { x: 2750, y: 150, width: 20, height: 250 };
+        // Decorations
+        const hills = [
+            { x: 50, y: 400, width: 120, height: 60 },
+            { x: 400, y: 400, width: 160, height: 80 },
+            { x: 900, y: 400, width: 100, height: 50 },
+            { x: 1500, y: 400, width: 140, height: 70 },
+            { x: 2200, y: 400, width: 120, height: 60 },
+            { x: 2800, y: 400, width: 180, height: 90 },
+        ];
         
-        // Clouds
         const clouds = [
-            { x: 100, y: 60, size: 1 }, { x: 350, y: 90, size: 0.8 }, { x: 600, y: 50, size: 1.2 },
-            { x: 900, y: 80, size: 1 }, { x: 1200, y: 40, size: 1.3 }, { x: 1500, y: 70, size: 0.9 },
-            { x: 1800, y: 55, size: 1.1 }, { x: 2100, y: 85, size: 1 }, { x: 2400, y: 60, size: 1.2 },
+            { x: 80, y: 50, size: 1 }, { x: 300, y: 80, size: 0.8 }, { x: 550, y: 40, size: 1.2 },
+            { x: 850, y: 70, size: 1 }, { x: 1200, y: 55, size: 0.9 }, { x: 1600, y: 65, size: 1.1 },
+            { x: 2000, y: 45, size: 1 }, { x: 2400, y: 75, size: 0.85 }, { x: 2900, y: 60, size: 1.15 },
         ];
+        
+        const flagpole = { x: 3050, y: 120 };
         
         // Init Canvas
         function initCanvas() {
@@ -141,7 +163,6 @@
             window.addEventListener('resize', resizeCanvas);
         }
         
-        // Resize Canvas
         function resizeCanvas() {
             const container = document.getElementById('gameContainer');
             const maxWidth = Math.min(window.innerWidth - 20, 800);
@@ -155,7 +176,6 @@
             container.style.height = game.canvas.height + 'px';
         }
         
-        // Touch Controls
         function setupTouchControls() {
             const btnLeft = document.getElementById('btnLeft');
             const btnRight = document.getElementById('btnRight');
@@ -167,7 +187,6 @@
                 element.addEventListener('touchend', function(e) { e.preventDefault(); game.keys[key] = false; });
                 element.addEventListener('mousedown', function() { game.keys[key] = true; });
                 element.addEventListener('mouseup', function() { game.keys[key] = false; });
-                element.addEventListener('mouseleave', function() { game.keys[key] = false; });
             }
             
             addTouch(btnLeft, 'ArrowLeft');
@@ -178,54 +197,63 @@
                 if (game.running) {
                     game.running = false;
                     cancelAnimationFrame(game.animationId);
-                    document.getElementById('overlay').classList.remove('hidden');
-                    document.querySelector('#overlay h1').textContent = 'PAUSED';
-                    document.querySelector('#overlay p').textContent = 'Tap to continue';
+                    document.querySelector('#overlay h1').textContent = '⏸ PAUSED';
+                    document.querySelector('#overlay p').textContent = 'Tap RESUME to continue';
                     document.getElementById('startBtn').textContent = 'RESUME';
+                    document.getElementById('overlay').classList.remove('hidden');
                 } else {
                     startGame();
                 }
             });
         }
         
-        // Keyboard
         document.addEventListener('keydown', function(e) {
             game.keys[e.code] = true;
-            if (['Space', 'ArrowUp'].includes(e.code)) { e.preventDefault(); if (game.running && player.onGround) player.vy = CONFIG.JUMP_FORCE; }
+            if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
+            if (e.code === 'KeyR') resetGame();
         });
         
         document.addEventListener('keyup', function(e) { game.keys[e.code] = false; });
         
-        // Collision
         function rectCollision(a, b) {
             return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
         }
         
-        // Reset Game
         function resetGame() {
-            player.x = 100; player.y = 300; player.vx = 0; player.vy = 0; player.onGround = false;
-            enemies.forEach(function(e, i) { e.x = [350, 600, 900, 1150, 1500, 1850, 2100, 2400][i]; e.y = 368; e.vx = [-1, -1.5, -1, -2, -1.5, -1, -2, -1][i]; e.alive = true; });
+            player.x = 100; player.y = 300; player.vx = 0; player.vy = 0; player.onGround = false; player.facing = 1; player.small = true;
+            enemies.forEach(function(e, i) { 
+                e.x = [380, 650, 980, 1200, 1480, 1750, 2050, 2350][i]; 
+                e.y = 368; 
+                e.vx = [-1.2, -1.5, -1, -2, -1.3, -1.5, -1, -1.8][i]; 
+                e.alive = true; 
+            });
             coins.forEach(function(c) { c.collected = false; });
-            game.score = 0; game.lives = 3; game.camera.x = 0;
+            platforms.forEach(function(p) { if (p.type === 'question') p.hit = false; });
+            game.score = 0; game.lives = 3; game.coins = 0; game.time = 300; game.camera.x = 0;
             updateUI();
         }
         
-        // Update UI
         function updateUI() {
-            document.getElementById('score').textContent = 'SCORE: ' + game.score;
-            document.getElementById('highScore').textContent = 'BEST: ' + game.highScore;
-            document.getElementById('lives').textContent = 'LIVES: ' + game.lives;
+            document.getElementById('score').textContent = game.score;
+            document.getElementById('highScore').textContent = game.highScore;
+            document.getElementById('coins').textContent = game.coins;
+            document.getElementById('lives').textContent = game.lives;
         }
         
-        // Start Game
+        function saveHighScore() {
+            if (game.score > game.highScore) {
+                game.highScore = game.score;
+                try { localStorage.setItem('oiram_highscore', game.highScore); } catch(e) {}
+            }
+        }
+        
         function startGame() {
             document.getElementById('overlay').classList.add('hidden');
             game.running = true;
-            resetGame();
+            if (game.lives <= 0 || game.score === 0) resetGame();
             gameLoop();
         }
         
-        // Game Loop
         function gameLoop() {
             if (!game.running) return;
             update();
@@ -233,8 +261,10 @@
             game.animationId = requestAnimationFrame(gameLoop);
         }
         
-        // Update
         function update() {
+            // Timer
+            if (Math.random() < 0.016) game.time--;
+            
             // Player movement
             if (game.keys['ArrowLeft']) { player.vx = -CONFIG.PLAYER_SPEED; player.facing = -1; }
             else if (game.keys['ArrowRight']) { player.vx = CONFIG.PLAYER_SPEED; player.facing = 1; }
@@ -249,13 +279,35 @@
             player.y += player.vy;
             player.onGround = false;
             
+            // Animation
+            if (Math.abs(player.vx) > 0.5 && player.onGround) {
+                player.frameTimer++;
+                if (player.frameTimer > 8) { player.frame = (player.frame + 1) % 3; player.frameTimer = 0; }
+            } else { player.frame = 0; }
+            
             // Platform collision
             platforms.forEach(function(p) {
                 if (rectCollision(player, p)) {
-                    if (player.vy > 0 && player.y + player.height - player.vy <= p.y + 5) {
+                    if (player.vy > 0 && player.y + player.height - player.vy <= p.y + 8) {
                         player.y = p.y - player.height; player.vy = 0; player.onGround = true;
-                    } else if (player.vy < 0 && player.y - player.vy >= p.y + p.height - 5) {
+                        if (p.type === 'question' && !p.hit) {
+                            p.hit = true;
+                            if (p.content === 'coin') {
+                                game.score += 100;
+                                game.coins++;
+                                updateUI();
+                            }
+                        }
+                    } else if (player.vy < 0 && player.y - player.vy >= p.y + p.height - 8) {
                         player.y = p.y + p.height; player.vy = 0;
+                        if (p.type === 'question' && !p.hit) {
+                            p.hit = true;
+                            if (p.content === 'coin') {
+                                game.score += 100;
+                                game.coins++;
+                                updateUI();
+                            }
+                        }
                     } else {
                         if (player.vx > 0) player.x = p.x - player.width;
                         else if (player.vx < 0) player.x = p.x + p.width;
@@ -267,55 +319,42 @@
             // Boundaries
             if (player.x < 0) player.x = 0;
             if (player.y > CONFIG.GROUND_Y + 100) {
-                game.lives--;
-                if (game.lives <= 0) {
-                    game.running = false;
-                    document.getElementById('overlay').classList.remove('hidden');
-                    document.querySelector('#overlay h1').textContent = 'GAME OVER';
-                    document.querySelector('#overlay p').textContent = 'Score: ' + game.score;
-                    document.getElementById('startBtn').textContent = 'TRY AGAIN';
-                } else {
-                    player.x = 100; player.y = 300; game.camera.x = 0;
-                }
-                updateUI();
+                playerDeath();
             }
             
             // Enemies
             enemies.forEach(function(e) {
                 if (!e.alive) return;
                 e.x += e.vx;
-                platforms.forEach(function(p) { if (e.x <= p.x || e.x + e.width >= p.x + p.width) { if (rectCollision(e, p)) e.vx *= -1; } });
+                platforms.forEach(function(p) { 
+                    if (p.type !== 'question' && e.x <= p.x + 5) { e.x = p.x + 5; e.vx = Math.abs(e.vx); }
+                    if (p.type !== 'question' && e.x + e.width >= p.x + p.width - 5) { e.x = p.x + p.width - e.width - 5; e.vx = -Math.abs(e.vx); }
+                });
                 if (rectCollision(player, e)) {
-                    if (player.vy > 0 && player.y + player.height < e.y + e.height / 2) {
-                        e.alive = false; player.vy = -8; game.score += 100;
+                    if (player.vy > 0 && player.y + player.height < e.y + e.height / 2 + 5) {
+                        e.alive = false; player.vy = -8; game.score += 200; updateUI();
                     } else {
-                        game.lives--;
-                        if (game.lives <= 0) {
-                            game.running = false;
-                            document.getElementById('overlay').classList.remove('hidden');
-                            document.querySelector('#overlay h1').textContent = 'GAME OVER';
-                            document.querySelector('#overlay p').textContent = 'Score: ' + game.score;
-                            document.getElementById('startBtn').textContent = 'TRY AGAIN';
-                        } else {
-                            player.x = 100; player.y = 300; game.camera.x = 0;
-                        }
-                        updateUI();
+                        playerDeath();
                     }
                 }
             });
             
             // Coins
             coins.forEach(function(c) {
-                if (!c.collected && rectCollision(player, c)) { c.collected = true; game.score += 10; updateUI(); }
+                if (!c.collected) {
+                    var coinRect = { x: c.x, y: c.y, width: 20, height: 24 };
+                    if (rectCollision(player, coinRect)) { c.collected = true; game.score += 50; game.coins++; updateUI(); }
+                }
             });
             
             // Win
-            if (rectCollision(player, flagpole)) {
+            if (player.x > 3000) {
                 game.running = false;
-                document.getElementById('overlay').classList.remove('hidden');
-                document.querySelector('#overlay h1').textContent = 'YOU WIN!';
-                document.querySelector('#overlay p').textContent = 'Score: ' + game.score;
+                saveHighScore();
+                document.querySelector('#overlay h1').textContent = '🏆 YOU WIN!';
+                document.querySelector('#overlay p').textContent = 'Score: ' + game.score + ' | Time: ' + game.time + 's';
                 document.getElementById('startBtn').textContent = 'PLAY AGAIN';
+                document.getElementById('overlay').classList.remove('hidden');
             }
             
             // Camera
@@ -324,7 +363,20 @@
             game.camera.x = Math.max(0, Math.min(game.camera.x, game.worldWidth - game.canvas.width / game.canvasScale));
         }
         
-        // Render
+        function playerDeath() {
+            game.lives--;
+            updateUI();
+            if (game.lives <= 0) {
+                game.running = false;
+                document.querySelector('#overlay h1').textContent = '💀 GAME OVER';
+                document.querySelector('#overlay p').textContent = 'Score: ' + game.score + ' | Best: ' + game.highScore;
+                document.getElementById('startBtn').textContent = 'TRY AGAIN';
+                document.getElementById('overlay').classList.remove('hidden');
+            } else {
+                player.x = 100; player.y = 300; player.vx = 0; player.vy = 0; game.camera.x = 0;
+            }
+        }
+        
         function render() {
             var ctx = game.ctx;
             var scale = game.canvasScale;
@@ -333,60 +385,159 @@
             ctx.save();
             ctx.scale(scale, scale);
             
+            // Hills (background)
+            ctx.fillStyle = '#228B22';
+            hills.forEach(function(h) {
+                var x = h.x - game.camera.x * 0.5;
+                if (x + h.width > 0 && x < 800) {
+                    ctx.beginPath();
+                    ctx.arc(x + h.width/2, h.y + h.height, h.width/2, 0, Math.PI, true);
+                    ctx.fill();
+                }
+            });
+            
             // Clouds
             ctx.fillStyle = 'white';
             clouds.forEach(function(c) {
                 var x = c.x - game.camera.x * 0.3;
-                ctx.beginPath(); ctx.arc(x, c.y, 25 * c.size, 0, Math.PI * 2);
-                ctx.arc(x + 25 * c.size, c.y - 10 * c.size, 30 * c.size, 0, Math.PI * 2);
-                ctx.arc(x + 55 * c.size, c.y, 25 * c.size, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(x, c.y, 22 * c.size, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(x + 22 * c.size, c.y - 8 * c.size, 25 * c.size, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(x + 48 * c.size, c.y, 20 * c.size, 0, Math.PI * 2); ctx.fill();
             });
             
             // Platforms
             platforms.forEach(function(p) {
                 var x = p.x - game.camera.x;
-                if (x + p.width < 0 || x > 800) return;
-                if (p.type === 'ground') { ctx.fillStyle = '#8b4513'; ctx.fillRect(x, p.y, p.width, p.height); ctx.fillStyle = '#5cb85c'; ctx.fillRect(x, p.y, p.width, 15); }
-                else if (p.type === 'brick') { ctx.fillStyle = '#cd853f'; ctx.fillRect(x, p.y, p.width, p.height); }
-                else if (p.type === 'pipe') { ctx.fillStyle = '#00aa00'; ctx.fillRect(x + 5, p.y + 20, p.width - 10, p.height - 20); ctx.fillRect(x, p.y, p.width, 25); }
+                if (x + p.width < -20 || x > 820) return;
+                if (p.type === 'ground') {
+                    ctx.fillStyle = '#8B4513';
+                    ctx.fillRect(x, p.y, p.width, p.height);
+                    ctx.fillStyle = '#228B22';
+                    ctx.fillRect(x, p.y, p.width, 12);
+                    // Ground dots
+                    ctx.fillStyle = '#228B22';
+                    for (var gx = x; gx < x + p.width; gx += 16) {
+                        ctx.beginPath(); ctx.arc(gx + 8, p.y + 6, 4, 0, Math.PI * 2); ctx.fill();
+                    }
+                } else if (p.type === 'brick') {
+                    ctx.fillStyle = '#CD853F';
+                    ctx.fillRect(x, p.y, p.width, p.height);
+                    ctx.strokeStyle = '#8B4513';
+                    ctx.lineWidth = 2;
+                    for (var bx = 0; bx < p.width; bx += 24) {
+                        for (var by = 0; by < p.height; by += 16) {
+                            ctx.strokeRect(x + bx, p.y + by, 24, 16);
+                        }
+                    }
+                } else if (p.type === 'pipe') {
+                    ctx.fillStyle = '#228B22';
+                    ctx.fillRect(x + 4, p.y + 20, p.width - 8, p.height - 20);
+                    ctx.fillStyle = '#32CD32';
+                    ctx.fillRect(x, p.y, p.width, 25);
+                } else if (p.type === 'question') {
+                    ctx.fillStyle = p.hit ? '#8B4513' : '#FFD700';
+                    ctx.fillRect(x, p.y, p.width, p.height);
+                    ctx.fillStyle = p.hit ? '#CD853F' : '#000';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.fillText(p.hit ? '' : '?', x + 10, p.y + 18);
+                }
             });
             
-            // Flagpole
-            var fx = flagpole.x - game.camera.x;
-            if (fx > -50 && fx < 800) {
-                ctx.fillStyle = '#00aa00'; ctx.fillRect(fx + 5, flagpole.y, 10, flagpole.height);
-                ctx.fillStyle = 'red'; ctx.beginPath(); ctx.moveTo(fx + 15, flagpole.y + 25); ctx.lineTo(fx + 55, flagpole.y + 40); ctx.lineTo(fx + 15, flagpole.y + 55); ctx.fill();
-            }
-            
             // Coins
+            var coinAnim = Math.sin(Date.now() / 150) * 2;
             coins.forEach(function(c) {
                 if (c.collected) return;
                 var x = c.x - game.camera.x;
-                if (x < -30 || x > 830) return;
-                ctx.fillStyle = 'gold'; ctx.beginPath(); ctx.ellipse(x + c.width/2, c.y + 12, 8, 10, 0, 0, Math.PI * 2); ctx.fill();
+                if (x < -20 || x > 820) return;
+                ctx.fillStyle = '#FFD700';
+                ctx.beginPath(); ctx.ellipse(x + 10, c.y + coinAnim + 12, 8, 10, 0, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = '#FFF8DC';
+                ctx.beginPath(); ctx.ellipse(x + 7, c.y + coinAnim + 9, 3, 4, 0, 0, Math.PI * 2); ctx.fill();
             });
             
             // Enemies
             enemies.forEach(function(e) {
                 if (!e.alive) return;
                 var x = e.x - game.camera.x;
-                if (x < -50 || x > 850) return;
-                ctx.fillStyle = '#8b4513'; ctx.beginPath(); ctx.arc(x + 16, e.y + 20, 14, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = 'white'; ctx.beginPath(); ctx.arc(x + 10, e.y + 12, 5, 0, Math.PI * 2); ctx.arc(x + 22, e.y + 12, 5, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(x + 12, e.y + 12, 2, 0, Math.PI * 2); ctx.arc(x + 20, e.y + 12, 2, 0, Math.PI * 2); ctx.fill();
+                if (x < -30 || x > 830) return;
+                // Body
+                ctx.fillStyle = '#8B4513';
+                ctx.beginPath(); ctx.arc(x + 14, e.y + 18, 14, 0, Math.PI * 2); ctx.fill();
+                ctx.fillRect(x, e.y + 18, 28, 10);
+                // Feet
+                ctx.fillStyle = '#000';
+                var footOffset = Math.sin(Date.now() / 80) * 2;
+                ctx.fillRect(x + 2, e.y + 26, 8, 6 + footOffset);
+                ctx.fillRect(x + 18, e.y + 26, 8, 6 - footOffset);
+                // Eyes
+                ctx.fillStyle = 'white';
+                ctx.beginPath(); ctx.arc(x + 9, e.y + 12, 5, 0, Math.PI * 2); ctx.arc(x + 19, e.y + 12, 5, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = 'black';
+                ctx.beginPath(); ctx.arc(x + 10, e.y + 13, 2, 0, Math.PI * 2); ctx.arc(x + 18, e.y + 13, 2, 0, Math.PI * 2); ctx.fill();
+                // Eyebrows
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(x + 4, e.y + 6); ctx.lineTo(x + 12, e.y + 8); ctx.moveTo(x + 24, e.y + 6); ctx.lineTo(x + 16, e.y + 8); ctx.stroke();
             });
             
-            // Player
-            ctx.fillStyle = 'red'; ctx.fillRect(player.x - game.camera.x, player.y, 28, 8);
-            ctx.fillRect(player.x - game.camera.x, player.y + 8, 28, 12);
-            ctx.fillStyle = '#0044aa'; ctx.fillRect(player.x - game.camera.x + 4, player.y + 20, 20, 18);
-            ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(player.x - game.camera.x + 16, player.y + 10, 2, 0, Math.PI * 2); ctx.fill();
-            ctx.fillRect(player.x - game.camera.x + 14, player.y + 15, 10, 3);
+            // Flagpole
+            var fx = flagpole.x - game.camera.x;
+            if (fx > -30 && fx < 830) {
+                ctx.fillStyle = '#00AA00';
+                ctx.fillRect(fx + 6, flagpole.y, 8, 280);
+                ctx.fillStyle = '#00FF00';
+                ctx.beginPath(); ctx.arc(fx + 10, flagpole.y, 12, 0, Math.PI * 2); ctx.fill();
+                // Flag
+                ctx.fillStyle = '#FF0000';
+                ctx.beginPath();
+                ctx.moveTo(fx + 14, flagpole.y + 25);
+                ctx.lineTo(fx + 50, flagpole.y + 40);
+                ctx.lineTo(fx + 14, flagpole.y + 55);
+                ctx.fill();
+            }
+            
+            // Player (with running animation)
+            var px = player.x - game.camera.x;
+            var py = player.y;
+            
+            // Legs animation
+            var legOffset = player.onGround && Math.abs(player.vx) > 0.5 ? Math.sin(Date.now() / 60) * 4 : 0;
+            
+            // Legs
+            ctx.fillStyle = '#0000CD';
+            ctx.fillRect(px + 4, py + 22, 6, 10 + legOffset);
+            ctx.fillRect(px + 18, py + 22, 6, 10 - legOffset);
+            
+            // Body
+            ctx.fillStyle = '#FF0000';
+            ctx.fillRect(px, py, 28, 14);
+            ctx.fillStyle = '#FF0000';
+            ctx.fillRect(px + 2, py + 14, 24, 10);
+            
+            // Overalls
+            ctx.fillStyle = '#0000FF';
+            ctx.fillRect(px + 2, py + 24, 24, 8);
+            
+            // Head
+            ctx.fillStyle = '#FFE4C4';
+            ctx.beginPath(); ctx.arc(px + 14, py - 2, 12, 0, Math.PI * 2); ctx.fill();
+            
+            // Hat
+            ctx.fillStyle = '#FF0000';
+            ctx.fillRect(px + 2, py - 10, 24, 8);
+            ctx.fillRect(px - 2, py - 6, 8, 4);
+            
+            // Eyes
+            ctx.fillStyle = 'black';
+            if (player.facing > 0) {
+                ctx.beginPath(); ctx.arc(px + 18, py - 2, 3, 0, Math.PI * 2); ctx.fill();
+            } else {
+                ctx.beginPath(); ctx.arc(px + 10, py - 2, 3, 0, Math.PI * 2); ctx.fill();
+            }
             
             ctx.restore();
         }
         
-        // Init
         initCanvas();
         updateUI();
         document.getElementById('startBtn').addEventListener('click', startGame);
