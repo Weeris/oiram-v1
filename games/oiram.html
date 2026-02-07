@@ -27,7 +27,7 @@
         .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.4); transform: scale(0.95); }
         .touch-group { display: flex; gap: 15px; }
         .touch-action-group { display: flex; gap: 20px; }
-        #pauseBtn { width: 50px; height: 50px; font-size: 20px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.3); display: none; z-index: 25; }
+        #pauseBtn { width: 45px; height: 45px; font-size: 16px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.4); display: none; z-index: 25; border-radius: 50%; }
         @media (max-width: 768px) {
             #gameContainer { width: 100% !important; height: auto !important; border-radius: 0; border-left: none; border-right: none; }
             #gameCanvas { width: 100% !important; height: auto !important; }
@@ -52,12 +52,14 @@
         <div id="ui"><div id="score">SCORE: 0</div><div id="lives">LIVES: 3</div></div>
         <button id="pauseBtn" class="touch-btn">PAUSE</button>
         <div id="touchControls">
-            <div class="touch-group">
-                <button class="touch-btn" id="btnLeft">LEFT</button>
-                <button class="touch-btn" id="btnRight">RIGHT</button>
-            </div>
-            <div class="touch-action-group">
-                <button class="touch-btn" id="btnJump">JUMP</button>
+            <div class="touch-row">
+                <div class="touch-dpad">
+                    <button class="touch-btn" id="btnLeft">◀</button>
+                    <button class="touch-btn" id="btnRight">▶</button>
+                </div>
+                <div class="touch-action">
+                    <button class="touch-btn" id="btnJump">●</button>
+                </div>
             </div>
         </div>
         <div id="overlay">
