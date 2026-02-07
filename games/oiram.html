@@ -25,9 +25,9 @@
         #touchControls.active { display: flex; flex-direction: column; align-items: flex-start; }
         .touch-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); border: 3px solid rgba(255, 255, 255, 0.5); color: white; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.1s ease; margin: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
         .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.5); transform: scale(0.95); box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .touch-row { display: flex; align-items: center; }
+        .touch-row { display: flex; flex-direction: column; align-items: flex-start; }
         .touch-dpad { display: flex; gap: 8px; }
-        .touch-action { display: flex; gap: 8px; margin-left: 35px; margin-top: 5px; }
+        .touch-action { display: flex; gap: 8px; margin-bottom: 5px; }
         #pauseBtn { width: 45px; height: 45px; font-size: 16px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.4); display: none; z-index: 25; border-radius: 50%; }
         @media (max-width: 768px) {
             #gameContainer { width: 100% !important; height: auto !important; border-radius: 0; border-left: none; border-right: none; }
@@ -54,12 +54,12 @@
         <button id="pauseBtn" class="touch-btn">PAUSE</button>
         <div id="touchControls">
             <div class="touch-row">
+                <div class="touch-action">
+                    <button class="touch-btn" id="btnJump">●</button>
+                </div>
                 <div class="touch-dpad">
                     <button class="touch-btn" id="btnLeft">◀</button>
                     <button class="touch-btn" id="btnRight">▶</button>
-                </div>
-                <div class="touch-action">
-                    <button class="touch-btn" id="btnJump">●</button>
                 </div>
             </div>
         </div>
