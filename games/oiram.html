@@ -21,12 +21,13 @@
         .controls h3 { margin-bottom: 10px; color: #87ceeb; text-align: center; }
         .controls p { margin: 5px 0; font-size: 12px; color: #fff; }
         .key { display: inline-block; padding: 4px 10px; background: #333; border-radius: 4px; margin: 0 3px; font-family: monospace; font-size: 11px; }
-        #touchControls { display: none; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; z-index: 20; padding: 10px 20px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%); }
-        #touchControls.active { display: flex; justify-content: space-between; align-items: center; }
-        .touch-btn { width: 70px; height: 70px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 3px solid rgba(255, 255, 255, 0.4); color: white; font-size: 28px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.1s ease; }
-        .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.4); transform: scale(0.95); }
-        .touch-group { display: flex; gap: 15px; }
-        .touch-action-group { display: flex; gap: 20px; }
+        #touchControls { display: none; position: absolute; bottom: 20px; left: 20px; z-index: 20; }
+        #touchControls.active { display: flex; flex-direction: column; align-items: flex-start; }
+        .touch-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); border: 3px solid rgba(255, 255, 255, 0.5); color: white; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.1s ease; margin: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .touch-btn:active, .touch-btn.active { background: rgba(255, 255, 255, 0.5); transform: scale(0.95); box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .touch-row { display: flex; align-items: center; }
+        .touch-dpad { display: flex; gap: 8px; }
+        .touch-action { display: flex; gap: 8px; margin-left: 35px; margin-top: 5px; }
         #pauseBtn { width: 45px; height: 45px; font-size: 16px; position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.4); display: none; z-index: 25; border-radius: 50%; }
         @media (max-width: 768px) {
             #gameContainer { width: 100% !important; height: auto !important; border-radius: 0; border-left: none; border-right: none; }
