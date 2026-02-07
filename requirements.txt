@@ -1,0 +1,2 @@
+# Oiram-V1 Dependencies
+streamlit>=1.28.0
